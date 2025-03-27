@@ -3,7 +3,6 @@ import 'package:orderit/locators/locator.dart';
 import 'package:orderit/common/services/storage_service.dart';
 import 'package:orderit/util/enums.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -83,18 +82,4 @@ Future fileShare(String path, String title, String text) async {
 
 String defaultDateFormat(String date) {
   return DateFormat('dd-MM-yyyy').format(DateTime.parse(date));
-}
-
-Future<XFile?> compressFile(XFile? file, int quality) async {
-  final filePath = file?.path;
-
-  var lastIndex = filePath!.lastIndexOf(RegExp(r'.jp'));
-  var splitted = filePath.substring(0, (lastIndex));
-  final outPath = '${splitted}_out${filePath.substring(lastIndex)}';
-  var compressedFile = await FlutterImageCompress.compressAndGetFile(
-    file!.path,
-    outPath,
-    quality: quality,
-  );
-  return compressedFile;
 }
